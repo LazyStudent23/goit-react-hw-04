@@ -1,24 +1,65 @@
-// import { IoSearch } from "react-icons/io5";
+import { IoSearch } from "react-icons/io5";
+import { Field, Form, Formik } from "formik";
+import css from "../SearchBar/SearchBar.module.css";
+import { SearchPhotosSchema } from "../utils/searchBarSchema";
+import { toast } from "react-hot-toast";
 
-// import css from "../SearchBar/SearchBar.module.css";
+const INITIAL_VALUES = {
+  searchTerm: "",
+};
 
-// const SearchBar = () => {
-//   return (
-//     // <header className={css.header}>
-//     //   <form className={css.headerForm}>
-//     //     <button type="submit" className={css.inputBtn}>
-//     //       <IoSearch />
-//     //     </button>
-//     //     <input
-//     //       type="text"
-//     //       autocomplete="off"
-//     //       autofocus
-//     //       placeholder="Search images and photos"
-//     //       className={css.headerInput}
-//     //     />
-//     //   </form>
-//     // </header>
-//   );
-// };
+const SearchBar = ({ onSearch }) => {
+  const handleSubmit = (values, actions) => {
+    if (values.searchTerm.trim() === "") {
+      toast.error(
+        "Sorry, you cant search without query term! Please enter search word first!"
+      );
+      return;
+    }
 
-// export default SearchBar;
+    onSearch(values.searchTerm);
+    actions.resetForm();
+  };
+  return (
+    <Formik
+      initialValues={INITIAL_VALUES}
+      validationSchema={SearchPhotosSchema}
+      onSubmit={handleSubmit}
+    >
+      <Form>
+        <div
+          style={{
+            position: "relative",
+            maxWidth: 250,
+            margin: "0 auto",
+            width: "100%",
+          }}
+        >
+          <button
+            style={{
+              top: "50%",
+              left: 1,
+              transform: "translateY(-50%)",
+              position: "absolute",
+            }}
+            type="submit"
+            className={css.inputBtn}
+          >
+            <IoSearch />
+          </button>
+          <Field
+            style={{ width: "100%", paddingLeft: 64, height: 41 }}
+            name="searchTerm"
+            type="text"
+            autoComplete="off"
+            autoFocus
+            placeholder="Search images and photos"
+            className={css.headerInput}
+          />
+        </div>
+      </Form>
+    </Formik>
+  );
+};
+
+export default SearchBar;
