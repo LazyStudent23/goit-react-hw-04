@@ -14,3 +14,5 @@ export const fetchPhotos = searchedQuery => {
 
   return axios.get(`/search/photos`, axiosOptions);
 };
+
+export default fetchPhotos;
