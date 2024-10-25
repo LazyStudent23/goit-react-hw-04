@@ -30,3 +30,5 @@ const ImageModal = ({ modalIsOpen, closeModal, imgFullUrl }) => {
 };
 
 export default ImageModal;
+
+// random comment
