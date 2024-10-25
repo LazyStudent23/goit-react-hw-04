@@ -27,36 +27,22 @@ const SearchBar = ({ onSearch }) => {
       onSubmit={handleSubmit}
     >
       <Form>
-        <div
-          style={{
-            position: "relative",
-            maxWidth: 250,
-            margin: "0 auto",
-            width: "100%",
-          }}
-        >
-          <button
-            style={{
-              top: "50%",
-              left: 1,
-              transform: "translateY(-50%)",
-              position: "absolute",
-            }}
-            type="submit"
-            className={css.inputBtn}
-          >
-            <IoSearch />
-          </button>
-          <Field
-            style={{ width: "100%", paddingLeft: 64, height: 41 }}
-            name="searchTerm"
-            type="text"
-            autoComplete="off"
-            autoFocus
-            placeholder="Search images and photos"
-            className={css.headerInput}
-          />
-        </div>
+        <header className={css.header}>
+          <div className={css.inputWrapper}>
+            <button type="submit" className={css.inputBtn}>
+              <IoSearch />
+            </button>
+            <Field
+              style={{ width: "100%", paddingLeft: 64, height: 41 }}
+              name="searchTerm"
+              type="text"
+              autoComplete="off"
+              autoFocus
+              placeholder="Search images and photos"
+              className={css.headerInput}
+            />
+          </div>
+        </header>
       </Form>
     </Formik>
   );

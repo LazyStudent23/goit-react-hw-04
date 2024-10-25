@@ -8,6 +8,7 @@ import SearchBar from "./components/SearchBar/SearchBar";
 import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
 import ImageModal from "./components/ImageModal/ImageModal";
 import { Toaster } from "react-hot-toast";
+import ImageGallery from "./components/ImageGallery/ImageGallery";
 
 const App = () => {
   const [photos, setPhotos] = useState(null);
@@ -64,32 +65,7 @@ const App = () => {
     <div>
       <SearchBar onSearch={onSearch} />
       <main>
-        <ul
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-          }}
-        >
-          {Array.isArray(photos) &&
-            photos.map((item) => {
-              return (
-                <li key={item.id}>
-                  <img
-                    onClick={() => onModalOpen(item.urls.full)}
-                    width="150"
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                    }}
-                    src={item.urls.regular}
-                    alt={item.alt_description}
-                  />
-                </li>
-              );
-            })}
-        </ul>
-
+        <ImageGallery onModalOpen={onModalOpen} photos={photos} />
         {isLoading && <Loader />}
         {error && <ErrorMessage message={error} />}
         {Array.isArray(photos) && photos.length > 0 && page < totalPages && (
